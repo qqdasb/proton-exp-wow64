@@ -1,12 +1,8 @@
-name: Proton Experimental CI
+name: Proton Experimental WoW64 CI
 
 on:
   schedule:
-    - cron:  '0 0 1,17 * *'
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    - cron:  '0 0 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,7 +24,7 @@ jobs:
           chmod +x build_wine.sh
           WINE_BRANCH=proton PROTON_BRANCH=bleeding-edge EXPERIMENTAL_WOW64=true ./build_wine.sh
           sha256sum *.tar.xz
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
-          name: Proton Experimental
+          name: Proton Experimental WoW64
           path: ./*.tar.xz
